@@ -1,36 +1,171 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏠 Casa mIA — MVP Hackatón Teletón 2025
+**Rehabilitación inteligente en el hogar con IA + Terapeutas + Familiares + Pacientes**
 
-## Getting Started
+Casa mIA es un prototipo funcional (MVP) desarrollado para la Hackatón Teletón.  
+Permite que terapeutas ocupacionales administren el proceso de rehabilitación de pacientes, el paciente realice ejercicios guiados desde su hogar, y sus familiares puedan ver el progreso y recibir alertas importantes.
 
-First, run the development server:
+El sistema está construido con:
+- **Next.js 16**
+- **Supabase (Auth + DB)**
+- **TypeScript**
+- **Tailwind (opcional)**
+- Arquitectura escalable hacia IA para corrección de ejercicios por cámara.
+
+---
+
+## 🚀 Objetivo del MVP
+Crear una plataforma funcional que:
+
+### 👩‍⚕️ Terapeutas
+- Gestionen pacientes.
+- Creen planes de rehabilitación.
+- Envíen alertas a familiares.
+- Revisen el progreso diario.
+
+### 👨‍👩‍👦 Familiares
+- Vean avances reales del paciente.
+- Reciban alertas del terapeuta.
+- Confirmar estado de alertas.
+
+### 🧑 Pacientes
+- Realicen ejercicios asignados.
+- Marquen ejercicios completados.
+- Vean progreso diario/semanal.
+
+---
+
+# 🛠️ Tecnologías utilizadas
+
+| Tecnología | Uso |
+|-----------|-----|
+| **Next.js 16** | Frontend y enrutamiento por roles |
+| **TypeScript** | Tipado seguro |
+| **Supabase Auth** | Registro / Login / Roles (terapeuta, familiar, paciente) |
+| **Supabase Database** | Perfiles, ejercicios, sesiones, alertas |
+| **Supabase Row Level Security** | Seguridad por usuario |
+| **React Hooks** | Manejo de estado |
+| **GitHub** | Control de versiones |
+
+---
+
+# 📁 Estructura del proyecto
+
+src/
+├── app/
+│ ├── login/
+│ ├── register/
+│ ├── terapeuta/
+│ │ ├── home/
+│ │ └── create-patient/
+│ ├── familiar/
+│ │ └── home/
+│ ├── paciente/
+│ └── home/
+│
+├── lib/
+│ └── supabaseClient.ts
+│
+└── styles, tests, etc.
+
+
+---
+
+# 🔐 Variables de entorno (obligatorias)
+
+Crear un archivo **.env.local**:
+
+NEXT_PUBLIC_SUPABASE_URL=TU_URL_AQUI
+NEXT_PUBLIC_SUPABASE_ANON_KEY=TU_ANON_KEY_AQUI
+
+
+Obtienes estos valores desde:
+
+Supabase → Configuración del proyecto → API
+
+---
+
+# ▶️ Cómo ejecutar el proyecto
+
+### 1. Clonar el repositorio
 
 ```bash
+git clone https://github.com/cabarcn/casamia-web.git
+cd casamia-web
+
+2. Instalar dependencias
+npm install
+
+3. Ejecutar en modo desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+El proyecto cargará en:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+👉 http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+👤 Roles del sistema
 
-## Learn More
+El usuario puede registrarse como:
 
-To learn more about Next.js, take a look at the following resources:
+Rol	Descripción
+terapeuta	Acceso completo a gestión de pacientes
+familiar	Visualiza progreso + alertas
+paciente	Ve y completa ejercicios asignados
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Base de Datos (Supabase)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Tablas implementadas:
 
-## Deploy on Vercel
+1. profiles
+Campo	Tipo	Descripción
+id	uuid	PK / referencia a auth.users
+full_name	text	Nombre del usuario
+role	text	‘terapist’, ‘family’, ‘patient’, ‘admin’
+created_at	timestamptz	Fecha de creación
+2. Próximas tablas:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+patients
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+plans
+
+sessions
+
+alerts
+
+🔥 Roadmap del Proyecto (MVP → Producción)
+✅ Implementado
+
+Login / Registro
+
+Roles con redirección automática
+
+Perfil vinculando auth.users → profiles
+
+Pantallas base para terapeuta, familiar y paciente
+
+Cierre de sesión
+
+Supabase configurado con RLS y políticas seguras
+
+CRUD básico de pacientes
+
+🚀 Próximas etapas
+
+Planes de ejercicios personalizados
+
+Sesiones diarias (ejercicios realizados)
+
+Alertas terapeuta → familiar
+
+Dashboard con gráficos
+
+Integración de IA:
+
+Corrección de movimiento
+
+Detección de rango articular
+
+Seguimiento postural por cámara
+
+🧡 Teletón nunca dejará de ayudar
+
+Gracias por apoyar la innovación en accesibilidad y rehabilitación.
